@@ -17,6 +17,8 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/Canvas/Index.vue'),
     children: [{ path: '1', name: 'Canvas1', component: () => import('@/views/Canvas/Canvas.vue') }],
   },
+  { path: '/calendar', name: 'calendar', component: () => import('@/views/calendar/index.vue') },
+  { path: '/map', name: 'map', component: () => import('@/views/map/index.vue') },
 ]
 
 const router = createRouter({

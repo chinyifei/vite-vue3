@@ -70,37 +70,52 @@ const goPage = () => {
 </script>
 
 <template>
-  <!-- <div>userStore.name: {{ userStore.name }}--{{ userStore.count }}</div>
-  <div>解构复制:userStore: {{ name }}--{{ count }}</div>
-  <button @click="change">count++</button>
-  <button @click="onReset">重置</button> -->
-  <RouterView />
-  <!-- <div>
-    <button @click="prev()">prev</button>
-    <button @click="next()">next</button>
-    <button @click="goPage">到demo传参</button>
-  </div>
-
-  <div>
-    插槽演示:
-    <Foo></Foo> -->
-  <!-- 关闭eslint在这一行 -->
-  <!-- eslint-disable -->
-    <!-- <Foo #default="{ defaultValue }">默认插槽有内容:{{ defaultValue }}</Foo>
-    <Foo>
-      具名插槽:
-      <template #foo="{ list }">this is slot name:foo {{ list }}</template>
-    </Foo>
-    <Foo>
+  <main>
+    <div class="contain">
+      <!-- <div>userStore.name: {{ userStore.name }}--{{ userStore.count }}</div>
+    <div>解构复制:userStore: {{ name }}--{{ count }}</div>
+    <button @click="change">count++</button>
+    <button @click="onReset">重置</button> -->
+      <RouterView />
+      <!-- <div>
+      <button @click="prev()">prev</button>
+      <button @click="next()">next</button>
+      <button @click="goPage">到demo传参</button>
+    </div>
+  
+    <div>
+      插槽演示:
+      <Foo></Foo> -->
+      <!-- 关闭eslint在这一行 -->
+      <!-- eslint-disable -->
+      <!-- <Foo #default="{ defaultValue }">默认插槽有内容:{{ defaultValue }}</Foo>
+      <Foo>
+        具名插槽:
+        <template #foo="{ list }">this is slot name:foo {{ list }}</template>
+      </Foo>
+    </div> -->
+    <!-- <Foo>
       作用域插槽传参:
-      <template #footer="{ footer }">this is slot name:footer {{ footer }}</template>
-    </Foo>
-  </div> -->
+      <template #footer="{ footer }">this is slot name: {{ footer }}</template>
+    </Foo> -->
+    <div class="test">home</div>
+  </div>
+  </main>
 </template>
 
-<style scoped>
-#app {
-  width: 100vw;
-  height: 100vh;
+<style lang="scss" scoped>
+main {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+}
+.contain {
+  flex: 1;
+  .test {
+    height: 100%; //flex: 1 继承不了这个撑开的高度
+  }
 }
 </style>

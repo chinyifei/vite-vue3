@@ -3,6 +3,10 @@ import './style.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+/* ES6 module in Node.js environment */
+import '@toast-ui/calendar/dist/toastui-calendar.min.css' // Stylesheet for calendar
+import 'tui-date-picker/dist/tui-date-picker.css'
+import 'tui-time-picker/dist/tui-time-picker.css'
 
 const app = createApp(App)
 

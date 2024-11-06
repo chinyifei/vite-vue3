@@ -32,7 +32,7 @@ const route = useRoute()
 
 onMounted(() => {
   console.log('route', route)
-  console.log(route.state) // 输出：测试传参
+  // console.log(route.state) // 输出：测试传参
   console.log(route.params) // 输出：11
 })
 
