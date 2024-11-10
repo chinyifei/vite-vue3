@@ -1,7 +1,6 @@
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
-import eslintPlugin from 'vite-plugin-eslint' //导入包
 
 // https://vitejs.dev/config/
 /**使用箭头函数形参获取当前模式 */
@@ -16,7 +15,7 @@ export default ({ mode }: { mode: string }) => {
         '@': path.resolve(__dirname, 'src'),
       },
     },
-    plugins: [vue(), eslintPlugin()],
+    plugins: [vue()],
     build: {
       sourcemap: false,
       chunkSizeWarningLimit: 2000,

@@ -4,6 +4,9 @@ import useUserStore from '@/store/modules/user'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import Foo from './views/Foo.vue'
+import { ImhdChannel } from 'imhd-channelization'
+import { onMounted, ref } from 'vue'
+const canvas = ref<HTMLCanvasElement | null>(null)
 const userStore = useUserStore()
 
 userStore.$subscribe((mutation, state) => {
@@ -22,7 +25,13 @@ userStore.$onAction(({ name, after, onError }) => {
 
 //pinia解构不具备响应式
 const { name, count } = storeToRefs(userStore)
+onMounted(() => {
+  // const canvas = document.getElementById('canvas') as HTMLCanvasElement
 
+  const imhdChannel = new ImhdChannel(canvas.value!)
+  console.log(ImhdChannel)
+  imhdChannel.init()
+})
 const change = () => {
   // userStore.count++
   // userStore.increment()
@@ -80,13 +89,14 @@ const goPage = () => {
     <button @click="next()">next</button>
     <button @click="goPage">到demo传参</button>
   </div>
-
+ -->
+  <canvas ref="canvas"></canvas>
   <div>
     插槽演示:
-    <Foo></Foo> -->
-  <!-- 关闭eslint在这一行 -->
-  <!-- eslint-disable -->
-    <!-- <Foo #default="{ defaultValue }">默认插槽有内容:{{ defaultValue }}</Foo>
+    <Foo></Foo>
+    <!-- 关闭eslint在这一行 -->
+    <!-- eslint-disable -->
+    <Foo #default="{ defaultValue }">默认插槽有内容:{{ defaultValue }}</Foo>
     <Foo>
       具名插槽:
       <template #foo="{ list }">this is slot name:foo {{ list }}</template>
@@ -95,7 +105,7 @@ const goPage = () => {
       作用域插槽传参:
       <template #footer="{ footer }">this is slot name:footer {{ footer }}</template>
     </Foo>
-  </div> -->
+  </div>
 </template>
 
 <style scoped>
