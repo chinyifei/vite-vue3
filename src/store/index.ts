@@ -11,7 +11,7 @@ const __piniaKey: string = 'yifei'
 //编写pinia插件
 const piniaPlugin = (options: PiniaOptions) => {
   return (ctx: PiniaPluginContext) => {
-    console.log('ctx:', ctx)
+    // console.log('ctx:', ctx)
     const { store } = ctx
     const data = getStorage(`${options.key ?? __piniaKey}-${store.$id}`)
     store.$subscribe(() => {

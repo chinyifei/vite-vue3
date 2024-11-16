@@ -27,10 +27,9 @@ userStore.$onAction(({ name, after, onError }) => {
 const { name, count } = storeToRefs(userStore)
 onMounted(() => {
   // const canvas = document.getElementById('canvas') as HTMLCanvasElement
-
-  const imhdChannel = new ImhdChannel(canvas.value!)
-  console.log(ImhdChannel)
-  imhdChannel.init()
+  // const imhdChannel = new ImhdChannel(canvas.value!)
+  // console.log(ImhdChannel)
+  // imhdChannel.init()
 })
 const change = () => {
   // userStore.count++
@@ -115,7 +114,7 @@ const goPage = () => {
 <style lang="scss" scoped>
 main {
   display: flex;
-  min-height: 100vh;
+  min-height: 90vh;
   flex-direction: column;
   margin: 0;
   padding: 0;

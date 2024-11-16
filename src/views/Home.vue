@@ -4,6 +4,8 @@
   <RouterLink to="/demo">Go to DEMO</RouterLink>
   <br />
   <RouterLink to="/calendar">Go to calendar</RouterLink>
+  <br />
+  <RouterLink to="/echarts">Go to echarts</RouterLink>
 </template>
 
 <script setup lang="ts">
