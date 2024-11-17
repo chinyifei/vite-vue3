@@ -4,7 +4,7 @@ import useUserStore from '@/store/modules/user'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import Foo from './views/Foo.vue'
-import { ImhdChannel } from 'imhd-channelization'
+// import { ImhdChannel } from 'imhd-channelization'
 import { onMounted, ref } from 'vue'
 const canvas = ref<HTMLCanvasElement | null>(null)
 const userStore = useUserStore()
@@ -106,7 +106,15 @@ const goPage = () => {
       作用域插槽传参:
       <template #footer="{ footer }">this is slot name: {{ footer }}</template>
     </Foo> -->
-    <div class="test">home</div>
+    <a-trigger trigger="click" align-point>
+      <div class="test">home</div>
+    <template #content>
+      <div class="demo-point">
+        <a-empty />
+      </div>
+    </template>
+  </a-trigger>
+    
   </div>
   </main>
 </template>
@@ -125,5 +133,24 @@ main {
   .test {
     height: 100%; //flex: 1 继承不了这个撑开的高度
   }
+}
+.demo-point-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  background-color: var(--color-fill-2);
+}
+
+.demo-point {
+  padding: 10px;
+  width: 200px;
+  background-color: var(--color-bg-popup);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+.demo-point-wrapper {
+  display: block;
 }
 </style>
