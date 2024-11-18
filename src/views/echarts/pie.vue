@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import TimeSlider from './TimeSlider.vue'
 // import oldTimeSlider from './oldTimeSlider.vue'
 
@@ -22,13 +22,15 @@ watch(timePoints, (newVal) => {
   console.log('timePoints:', newVal)
 })
 
-// 计算时间段
+// 计算时间段 - 修复计算属性中的副作用
 const timeSegments = computed(() => {
-  const points = [0, ...timePoints.value.sort((a, b) => a - b), 1440]
-  const segments = []
+  // 创建新数组并排序，避免修改原数组
+  const sortedPoints = [0, ...timePoints.value].sort((a, b) => a - b)
+  sortedPoints.push(1440)
 
-  for (let i = 0; i < points.length - 1; i++) {
-    segments.push([points[i], points[i + 1]])
+  const segments = []
+  for (let i = 0; i < sortedPoints.length - 1; i++) {
+    segments.push([sortedPoints[i], sortedPoints[i + 1]])
   }
 
   return segments

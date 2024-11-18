@@ -22,23 +22,9 @@
             <a-input v-model="block.name" placeholder="请输入时间段名称" />
           </a-form-item>
           <a-form-item label="时间范围">
-            <a-time-picker
-              v-model="block.startTime"
-              disable-confirm
-              format="HH:mm"
-              placeholder="开始时间"
-              style="width: 120px"
-              @change="updateTimeRange(index)"
-            />
+            <a-time-picker v-model="block.startTime" format="HH:mm" placeholder="开始时间" style="width: 120px" @change="updateTimeRange(index)" />
             <span class="separator">至</span>
-            <a-time-picker
-              v-model="block.endTime"
-              disable-confirm
-              format="HH:mm"
-              placeholder="结束时间"
-              style="width: 120px"
-              @change="updateTimeRange(index)"
-            />
+            <a-time-picker v-model="block.endTime" format="HH:mm" placeholder="结束时间" style="width: 120px" @change="updateTimeRange(index)" />
           </a-form-item>
         </a-form>
       </div>
@@ -95,7 +81,6 @@ const updateTimeRange = (index) => {
 
 // 拖拽相关方法
 const handleDragStart = (index) => {
-  console.log('handleDragStart', index)
   draggedItem = index
 }
 
@@ -104,7 +89,6 @@ const handleDragEnd = () => {
 }
 
 const handleDrop = (dropIndex) => {
-  console.log('dropIndex', dropIndex)
   if (draggedItem === null) return
 
   const itemToMove = timeBlocks.value[draggedItem]
