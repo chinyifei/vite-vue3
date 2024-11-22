@@ -7,6 +7,7 @@
       </div>
     </div>
     <!-- <old-time-slider /> -->
+    <pie-demo1 />
   </div>
 </template>
 
@@ -14,6 +15,7 @@
 import { ref, computed, watch, onMounted } from 'vue'
 import TimeSlider from './TimeSlider.vue'
 // import oldTimeSlider from './oldTimeSlider.vue'
+import pieDemo1 from './pieDemo1.vue'
 
 const timePoints = ref([]) // 存储时间点（单位：分钟）
 

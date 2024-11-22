@@ -104,6 +104,11 @@ const positionToValue = (position) => {
 const addTimePoint = (event) => {
   const newValue = positionToValue(event.clientX)
 
+  // 禁止在端点附近添加时间点（距离端点10分钟内）
+  if (newValue <= 10 || newValue >= 1430) {
+    return
+  }
+
   // 检查是否已存在相近的点（5分钟内）
   const hasNearbyPoint = timePoints.value.some((point) => Math.abs(point - newValue) < 5)
 
@@ -136,13 +141,13 @@ const handleMouseMove = (event) => {
 
   const newValue = positionToValue(event.clientX)
 
-  // 添加边界检查，确保不会与相邻点重叠
+  // 添加边界检查，确保不会与相邻点重叠，且不会到达端点
   const points = sortedTimePoints.value
   const currentIdx = points.indexOf(timePoints.value[currentPointIndex.value])
 
-  // 检查左右边界
-  const leftBound = currentIdx > 0 ? points[currentIdx - 1] + 5 : 0
-  const rightBound = currentIdx < points.length - 1 ? points[currentIdx + 1] - 5 : 1440
+  // 检查左右边界，增加端点限制
+  const leftBound = currentIdx > 0 ? points[currentIdx - 1] + 5 : 10 // 最小值为10分钟
+  const rightBound = currentIdx < points.length - 1 ? points[currentIdx + 1] - 5 : 1430 // 最大值为1430分钟
 
   // 限制在有效范围内
   const boundedValue = Math.max(leftBound, Math.min(rightBound, newValue))
@@ -355,5 +360,18 @@ onUnmounted(() => {
 
 .menu-item.delete:hover {
   background-color: #fff2f2;
+}
+
+/* 添加端点标记样式 */
+.time-mark:first-child,
+.time-mark:last-child {
+  height: 10px; /* 端点刻度线加长 */
+  background-color: #f53f3f; /* 端点刻度线变红 */
+}
+
+.time-mark:first-child .mark-label,
+.time-mark:last-child .mark-label {
+  color: #f53f3f; /* 端点文字变红 */
+  font-weight: bold;
 }
 </style>

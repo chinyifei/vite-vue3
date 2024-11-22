@@ -12,12 +12,12 @@
       </div>
     </template>
   </a-trigger>
-  <time-range-input @submit="handleSubmit" />
+  <!-- <time-range-input @submit="handleSubmit" /> -->
 </template>
 
 <script setup>
 import { use } from 'echarts/core'
-import TimeRangeInput from './timeRangeInput.vue'
+// import TimeRangeInput from './timeRangeInput.vue'
 import { CanvasRenderer } from 'echarts/renderers'
 import { PieChart } from 'echarts/charts'
 import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components'
@@ -80,12 +80,13 @@ const handleChartClick = (params) => {
       scaleSize: 10,
     },
   }))
+
   console.log('点击的饼图数据:', {
     id: data.id,
     name: data.name,
     timeRange: `${formatTime(startHours, startMins)} - ${formatTime(endHours, endMins)}`,
-    duration: `${Math.floor(data.value / 60)}小时${data.value % 60}分钟`,
-    selected: isSelected, // 添加选中状态
+    duration: `${Math.floor((endMinutes - startMinutes) / 60)}小时${(endMinutes - startMinutes) % 60}分钟`,
+    selected: isSelected,
   })
 }
 
@@ -94,30 +95,21 @@ const handleContextMenu = (params) => {
   params.event.event.preventDefault()
   // 阻止事件冒泡到父元素
   params.event.event.stopPropagation()
-  // popupVisible.value = true
 
   if (params.componentType === 'series') {
-    const { data, dataIndex } = params
+    const { data } = params
     const [startMinutes, endMinutes] = data.timeRange
     const startHours = Math.floor(startMinutes / 60)
     const startMins = startMinutes % 60
     const endHours = Math.floor(endMinutes / 60)
     const endMins = endMinutes % 60
 
-    console.log(
-      '右键点击的饼图数据:',
-      {
-        id: data.id,
-        name: data.name,
-        timeRange: `${formatTime(startHours, startMins)} - ${formatTime(endHours, endMins)}`,
-        duration: `${Math.floor(data.value / 60)}小时${data.value % 60}分钟`,
-        value: data.timeRange,
-      },
-      data
-    )
-
-    // 这里可以添加你的右键点击逻辑
-    // 比如显示自定义菜单等
+    console.log('右键点击的饼图数据:', {
+      id: data.id,
+      timeRange: `${formatTime(startHours, startMins)} - ${formatTime(endHours, endMins)}`,
+      duration: `${Math.floor((endMinutes - startMinutes) / 60)}小时${(endMinutes - startMinutes) % 60}分钟`,
+      value: data.timeRange,
+    })
   }
 }
 
@@ -132,17 +124,13 @@ const option = ref({
       const endHours = Math.floor(endMinutes / 60)
       const endMins = endMinutes % 60
 
-      const durationHours = Math.floor(params.value / 60)
-      const durationMins = params.value % 60
+      const durationMinutes = endMinutes - startMinutes
+      const durationHours = Math.floor(durationMinutes / 60)
+      const durationMins = durationMinutes % 60
 
-      return `${params.name}<br/>
-              时间段：${formatTime(startHours, startMins)} - ${formatTime(endHours, endMins)}<br/>
+      return `时间段：${formatTime(startHours, startMins)} - ${formatTime(endHours, endMins)}<br/>
               时长：${durationHours}小时${durationMins}分钟`
     },
-  },
-  legend: {
-    top: '5%',
-    left: 'center',
   },
   series: [
     {
@@ -174,42 +162,42 @@ const option = ref({
         {
           value: 240, // 使用持续时间作为主要的value
           timeRange: [0, 240], // 时间范围作为额外属性
-          name: '凌晨',
+          // name: '凌晨',
           id: 1,
           selected: false, // 添加初始选中状态
         },
         {
           value: 360,
           timeRange: [240, 600],
-          name: '早上',
+          // name: '早上',
           id: 2,
           selected: false,
         },
         {
           value: 120,
           timeRange: [600, 720],
-          name: '中午',
+          // name: '中午',
           id: 3,
           selected: false,
         },
         {
           value: 300,
           timeRange: [720, 1020],
-          name: '下午',
+          // name: '下午',
           id: 4,
           selected: false,
         },
         {
           value: 180,
-          timeRange: [1020, 1200],
-          name: '傍晚',
+          timeRange: [1020, 1220],
+          // name: '傍晚',
           id: 5,
           selected: false,
         },
         {
           value: 240,
-          timeRange: [1200, 1440],
-          name: '晚上',
+          timeRange: [1220, 1440],
+          // name: '晚上',
           id: 6,
           selected: false,
         },
