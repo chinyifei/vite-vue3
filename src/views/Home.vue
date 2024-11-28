@@ -6,6 +6,8 @@
   <RouterLink to="/calendar">Go to calendar</RouterLink>
   <br />
   <RouterLink to="/echarts">Go to echarts</RouterLink>
+  <br />
+  <RouterLink to="/randomColor">Go to randomColor</RouterLink>
 </template>
 
 <script setup lang="ts">

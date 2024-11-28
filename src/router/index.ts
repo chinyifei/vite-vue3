@@ -20,6 +20,7 @@ const routes: Array<RouteRecordRaw> = [
   { path: '/calendar', name: 'calendar', component: () => import('@/views/calendar/index.vue') },
   { path: '/map', name: 'map', component: () => import('@/views/map/index.vue') },
   { path: '/echarts', name: 'echarts', component: () => import('@/views/echarts/pie.vue') },
+  { path: '/randomColor', name: 'randomColor', component: () => import('@/views/color/random-color.vue') },
 ]
 
 const router = createRouter({
